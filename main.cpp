@@ -145,7 +145,11 @@ static void renderSnapshot(const Body &B, const std::string &file, double zoom =
 
         if (B[i].mass > 0.5 * SOLAR_MASS) {
             // Draw star as a single yellow pixel (can change to 3x3 if preferred)
-            plotPixel(im, px, py, 255, 220, 40);
+            for (int dy = -1; dy <= 1; ++dy) {
+                for (int dx = -1; dx <= 1; ++dx) {
+                    plotPixel(im, px + dx, py + dy, 255, 220, 40);
+                }
+            }
         } else {
             plotPixel(im, px, py, 180, 200, 255);
         }
