@@ -1,7 +1,7 @@
 # Clean up old simulation files so the simulation runs form scrartch every time.
 
 #Status messeges for clarity
-Write-Host "`nCleaning up previous run...`n"
+Write-Host "`nCleaning up previous run...`n" -ForegroundColor Cyan
 
 # Remove the 'images' directory if it exists
 if (Test-Path "images") {
@@ -19,4 +19,4 @@ if (Test-Path "result.mp4") {
     Write-Host "Removed old 'results.mp4'."
 }
 
-Write-Host "`nCleanup complete. Running Simulation...`n"
+Write-Host "`nCleanup complete. Running Simulation...`n" -ForegroundColor Green
