@@ -151,10 +151,35 @@ static void renderSnapshot(const Body &B, const std::string &file, double zoom =
                 }
             }
         } else {
-            plotPixel(im, px, py, 180, 200, 255);
+            // Colour gradients based on distance from the center star
+            // Calculate distance from center star
+            double dist = std::sqrt(rx * rx + ry * ry); // Distance in Astronomical Units
+            double normalizedDistance = std::min(1.0, dist / view_half); // Normalize the particle distance to(0 or 1)
+
+            //Adding a 4 Colour gradient. Center = red, Middle = yellow, Outer = Cyan,  Edge = Blue
+            uint8_t r, g, b;
+            if (normalizedDistance < 0.33) {
+                // Inner: Red to Yellow
+                r = 255;
+                g = (uint8_t)(255 * (normalizedDistance / 0.33));
+                b = 0;
+            } else if (normalizedDistance < 0.66) {
+                // Middle: Yellow to Cyan
+                double t = (normalizedDistance - 0.33) / 0.33;
+                r = (uint8_t)(255 * (1.0 - t));
+                g = 255;
+                b = (uint8_t)(255 * t);
+            } else {
+                // Outer: Cyan to Blue
+                double t = (normalizedDistance - 0.66) / 0.34;
+                r = 0;
+                g = (uint8_t)(255 * (1.0 - t));
+                b = 255;
+            }
+            plotPixel(im, px, py, r, g, b);
+
         }
     }
-
     writePPM(im, WIDTH, HEIGHT, file);
 }
 
