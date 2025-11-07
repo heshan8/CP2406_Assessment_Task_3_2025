@@ -65,4 +65,13 @@ Explore how different parameters in `Constants.h` affect the N-body gravity simu
 
 ## Color Modifications
 
+Instead of the default blue particles, I added 4 colour gradients to the render using 3 blending ranges. **(red -> yellow, yellow -> cyan and cyan -> blue)** This makes it look more appealing and helps you refer to different parts of the disc more clearly.
+
+The colour is calculated dynamically based on each particle's distance from center star:
+
+```
+double dist = std::sqrt(rx * rx + ry * ry);
+double normalized_dist = std::min(1.0, dist / view_half);
+```
+
 
