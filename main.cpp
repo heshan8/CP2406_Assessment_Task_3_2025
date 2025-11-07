@@ -161,17 +161,17 @@ static void renderSnapshot(const Body &B, const std::string &file, double zoom =
             if (normalizedDistance < 0.33) {
                 // Inner: Red to Yellow
                 r = 255;
-                g = (uint8_t)(255 * (normalizedDistance / 0.33));
+                g = (uint8_t)(255 * (normalizedDistance / 0.33)); // map 0–0.33 range to 0–1 to blend rend and yellow
                 b = 0;
             } else if (normalizedDistance < 0.66) {
                 // Middle: Yellow to Cyan
-                double t = (normalizedDistance - 0.33) / 0.33;
+                double t = (normalizedDistance - 0.33) / 0.33; // normalize 0.33–0.66 range to blend yellow and cyan
                 r = (uint8_t)(255 * (1.0 - t));
                 g = 255;
                 b = (uint8_t)(255 * t);
             } else {
                 // Outer: Cyan to Blue
-                double t = (normalizedDistance - 0.66) / 0.34;
+                double t = (normalizedDistance - 0.66) / 0.34; // normalize 0.66–1.0 range to blend cyan and blue
                 r = 0;
                 g = (uint8_t)(255 * (1.0 - t));
                 b = 255;
