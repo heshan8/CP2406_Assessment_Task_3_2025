@@ -33,20 +33,42 @@ Explore how different parameters in `Constants.h` affect the N-body gravity simu
 ### Screenshot:
 - Frame 0 shows initial disk configuration
   - Using frame 0 for accuracy before simulation makes any particle changes
-- Particles clearly visible as individual points
 
 <img src="/Parameter_Testing/default_test_frame_0.png" alt="Test 1 image" width="400">
 
 
 ## Test 1: increasing NUM_BODIES
 
+In this test, the number of bodies was increased by 2.5.
+
 ### Hypothesis (Before Running):
+- The simulation will appear crowded because more particles are present
+- It will take longer to run due to increased amount of computations
+- Increased visual density
 
 ### Settings:
+```
+#define NUM_BODIES      (25*1024)    // 25,600 bodies (x2.5)
+#define SYSTEM_SIZE_AU  10.0         // Default
+#define DISK_MASS_FRAC  0.2          // Default
+```
 
 ### Findings:
+- **Appearance:** Significantly denser disc, much harder to see individual particles
+- **Particles:** Much denser at the center (Yellow zone) and the outer areas are much more crowded than default
+- **Total Bodies:** 25,600 disk particles + 1 central star
+- **Simulation Performance:** Completed 100 steps in roughly a minute but still manageable due to the Barnes-Hut algorithm.
+
+### Screenshot:
+
+- Using frame 0
+
+<img src="/Parameter_Testing/test1_frame_0.png" alt="Test 1 image" width="400">
 
 ### Conclusion:
+
+Increasing ```NUM_BODIES``` directly increases visual density. The simulation handles the increased load fairly well due to the Barnes-Hut algorithm which scales as O(n log n) rather than O(n²).
+
 
 ---
 
