@@ -37,7 +37,7 @@ Explore how different parameters in `Constants.h` affect the N-body gravity simu
 <img src="/Parameter_Testing/default_test_frame_0.png" alt="Test 1 image" width="400">
 
 
-## Test 1: increasing NUM_BODIES
+## Test 1: increasing number of particles (NUM_BODIES)
 
 In this test, the number of bodies was increased by 2.5.
 
@@ -72,7 +72,7 @@ Increasing ```NUM_BODIES``` directly increases visual density. The simulation ha
 
 ---
 
-## Test 2: Reducing SYSTEM_SIZE_AU
+## Test 2: Reducing the system size (SYSTEM_SIZE_AU)
 
 In this test, the system size was reduced to 5.0 from 10.0 (Halved)
 
@@ -113,15 +113,62 @@ This parameter is useful when you need to examine specific areas in the simulati
 ---
 
 ## Test 3: Increasing Disk Mass (DISK_MASS_FRAC)
+In this test, the mass of the disc was increased from 0.2 (20%) to 1.0 (100%)
 
-### Hypothesis:
+### Predictions:
+- Adding more mass could change the disk's orbit if the change is high enough
+- The particles might have increased space between them due to higher gravity
+- Particles may interact more with each other or group together
+- Less stable in the disk due to the central star having less gravitational control
+- Run time should be close to default since the number of bodies is unchanged
 
 ### Settings:
+```
+#define NUM_BODIES      (10*1024)   // 10,240 bodies (Default)
+#define SYSTEM_SIZE_AU  10.0        // Default
+#define DISK_MASS_FRAC  0.8         // Chanaged from 0.2 (20%) to 1.0 (100%)
+```
 
 ### Findings:
+**Frame 0:**
+- Particle distribution is similar to frame 0 from the default test
+
+**Frame 100:**
+- **Appearance:** Disk is much more spread out compared to frame 0
+  - Distinct spiral pattern in the center
+- **Particles:** Prediction CONFIRMED - More space between particles and clear grouping compared to Frame 0 and Default Frame 100
+  - Prediction CONFIRMED - CLear particle orbit changes
+- **Simulation Performance:** Prediction CONFIRMED - Completed 100 steps in roughly 16 seconds, which is similar to default test.
+
+**Comparison to Default test frame 100:**
+- Default (DISK_MASS_FRAC = 0.2) 
+  - Spiral pattern in present but less distinct
+  - Less grouping 
+- Test 3 (DISK_MASS_FRAC = 1.0) 
+  - shows dispersed, chaotic distribution
+  - Much tighter grouping (Brighter spots in the cyan region)
+  - Distinct spiral pattern in the center (Linse visible in yellow section)
+  - Central star has less control of the bodies
+
+### Screenshot:
+
+- The first two tests only show rendering differences. 
+- DISK_MASS_FRAC affects the physics of the simulation. 
+- Both (Frame 0) and (Frame 100) are used to show the changes in the simulation."
+
+#### Test 03 Frame 0:
+<img src="/Parameter_Testing/test3_frame_0.png" alt="Test 3" width="400">
+
+#### Test 03 Frame 100:
+
+<img src="/Parameter_Testing/test3_frame_100.png" alt="Test 3" width="400">
+
+#### Default Frame 100:
+
+<img src="/Parameter_Testing/default_test_frame_100.png" alt="Test 3" width="400">
 
 ### Conclusion:
-
+DISK_MASS_FRAC has a clear effect on system stability. When the disk mass gets closer to the mass of the central star, the disc becomes dominated by particle interactions causing much more random and chaotic orbits. This reduces disc stability where as the default creates a nice stable system with much more organized orbits.
 
 ## Color Modifications
 
