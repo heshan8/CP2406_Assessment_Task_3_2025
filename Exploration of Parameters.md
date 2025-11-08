@@ -41,7 +41,7 @@ Explore how different parameters in `Constants.h` affect the N-body gravity simu
 
 In this test, the number of bodies was increased by 2.5.
 
-### Hypothesis (Before Running):
+### Predictions:
 - The simulation will appear crowded because more particles are present
 - It will take longer to run due to increased amount of computations
 - Increased visual density
@@ -57,11 +57,11 @@ In this test, the number of bodies was increased by 2.5.
 - **Appearance:** Significantly denser disc, much harder to see individual particles
 - **Particles:** Much denser at the center (Yellow zone) and the outer areas are much more crowded than default
 - **Total Bodies:** 25,600 disk particles + 1 central star
-- **Simulation Performance:** Completed 100 steps in roughly a minute but still manageable due to the Barnes-Hut algorithm.
+- **Simulation Performance:** Prediction CONFIRMED - Completed 100 steps in roughly a minute but still manageable due to the Barnes-Hut algorithm.
 
 ### Screenshot:
 
-- Using frame 0
+- Test 01 Frame 0
 
 <img src="/Parameter_Testing/test1_frame_0.png" alt="Test 1 image" width="400">
 
@@ -72,15 +72,43 @@ Increasing ```NUM_BODIES``` directly increases visual density. The simulation ha
 
 ---
 
-## Test 2: Zooming In (Reducing SYSTEM_SIZE_AU)
+## Test 2: Reducing SYSTEM_SIZE_AU
 
-### Hypothesis:
+In this test, the system size was reduced to 5.0 from 10.0 (Halved)
+
+### Predictions:
+- Fewer bodies will appear due to the outer being cut off (Zoomed in)
+- More detail on the bodies that are visible
+- The bodies will look bigger
+- Shorter runtime
 
 ### Settings:
 
+```
+#define NUM_BODIES      (10*1024)   // 10,240 bodies (Default)
+#define SYSTEM_SIZE_AU  5.0         // Halved form 10.0
+#define DISK_MASS_FRAC  0.2         // Default
+```
+
 ### Findings:
+- **Appearance:** Prediction CONFIRMED - Individual particles appear much larger in the usually dense center
+- **Particles:** Better detail in the center, but outer edges are cut off
+  - Prediction CONFIRMED - Can clearly distinguish individual particles, especially in reg region
+- **Total Bodies:** 10,241 bodies (same as default), but fewer particles visible in frame
+- **Simulation Performance:** Prediction CONFIRMED - Completed 100 steps in roughly 16 seconds
+  - The Total number of particles in memory doesn’t change, but  less of them are rendered because the ones outside the view get skipped.
+  - Run time may be shorter due to fewer visible particles being rendered
+
+### Screenshot
+
+- Test 02 Frame 0
+
+<img src="/Parameter_Testing/test2_frame_0.png" alt="Test 1 image" width="400">
 
 ### Conclusion:
+Reducing the system size ```SYSTEM_SIZE_AU``` zooms in on the simulation.
+Particles appear bigger, more details visible in the center, but the outer edges of the disc are out of view.
+This parameter is useful when you need to examine specific areas in the simulation more closely.
 
 ---
 
