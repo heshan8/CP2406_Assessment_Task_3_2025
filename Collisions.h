@@ -10,13 +10,25 @@
 // Conserves mass and linear momentum. Positions in AU; velocities in m/s.
 // TODO Complete this function ...
 inline void checkAndMergeCollision(body& a, body& b, double thresholdAU = COLLISION_THRESHOLD_AU) {
-    double dx = a.position.x - b.position.x; // Finding the weighted average between the two bodies
-    double dy = a.position.y - b.position.y;
-    double dz = a.position.z - b.position.z;
-    double distance = sqrt(dx * dx + dy * dy + dz * dz);
+    double dx = a.position.x - b.position.x; // Difference in x positions between the two bodies (Horizontal)
+    double dy = a.position.y - b.position.y; // Difference in y positions (Vertical)
+    double dz = a.position.z - b.position.z; // Difference in z positions (Depth)
+    double distance = sqrt(dx * dx + dy * dy + dz * dz); // Straight line distance (in 3D space)
 
 
-
+/*
+    If distance is less than thresholdDistance:
+        Merge B into A:
+        - Compute total mass = A.mass + B.mass
+        - Update A.position to center of mass:
+            A.position = (A.position * A.mass + B.position *
+    B.mass) / total mass
+        - Update A.velocity to conserve momentum:
+            A.velocity = (A.velocity * A.mass + B.velocity *
+    B.mass) / total mass
+        - Set A.mass = total mass
+        - Mark B as inactive (e.g., set B.velocity = 0)
+*/
 
 }
 
