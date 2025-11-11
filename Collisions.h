@@ -10,6 +10,11 @@
 // Conserves mass and linear momentum. Positions in AU; velocities in m/s.
 // TODO Complete this function ...
 inline void checkAndMergeCollision(body& a, body& b, double thresholdAU = COLLISION_THRESHOLD_AU) {
+    double dx = a.position.x - b.position.x; // Finding the weighted average between the two bodies
+    double dy = a.position.y - b.position.y;
+    double dz = a.position.z - b.position.z;
+    double distance = sqrt(dx * dx + dy * dy + dz * dz);
+
 
 
 
